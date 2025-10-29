@@ -1,0 +1,100 @@
+version: '3.8'
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    ports:
+      - "8443:8443"
+      - "8444:8444"
+    volumes:
+      - ./certs:/etc/nginx/certs:ro
+    networks:
+      - ssl-network
+    restart: "no"
+    healthcheck:
+      test: ["CMD", "curl", "-k", "-f", "https://localhost:8443/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  test-https-no-ca:
+    image: ssl-example-test-https-no-ca
+    volumes:
+      - ./certs:/certs:ro
+    networks:
+      - ssl-network
+    depends_on:
+      - nginx
+    restart: "no"
+    environment:
+      - SERVER_HOST=nginx
+
+  test-https-insecure:
+    image: ssl-example-test_https_insecure
+    volumes:
+      - ./certs:/certs:ro
+    networks:
+      - ssl-network
+    depends_on:
+      - nginx
+    restart: "no"
+    environment:
+      - SERVER_HOST=nginx
+
+  test-https-with-ca:
+    image: ssl-example-test_https_with_ca
+    volumes:
+      - ./certs:/certs:ro
+    networks:
+      - ssl-network
+    depends_on:
+      - nginx
+    restart: "no"
+    environment:
+      - SERVER_HOST=nginx
+
+  test-mtls-no-client-cert:
+    image: ssl-example-test_mtls_no_client_cert
+    volumes:
+      - ./certs:/certs:ro
+    networks:
+      - ssl-network
+    depends_on:
+      - nginx
+    restart: "no"
+    environment:
+      - SERVER_HOST=nginx
+
+  test-mtls-invalid-cert:
+    image: ssl-example-test_mtls_invalid_cert
+    volumes:
+      - ./certs:/certs:ro
+    networks:
+      - ssl-network
+    depends_on:
+      - nginx
+    restart: "no"
+    environment:
+      - SERVER_HOST=nginx
+
+  test-mtls-valid-cert:
+    image: ssl-example-test_mtls_valid_cert
+    volumes:
+      - ./certs:/certs:ro
+    networks:
+      - ssl-network
+    depends_on:
+      - nginx
+    restart: "no"
+    environment:
+      - SERVER_HOST=nginx
+
+networks:
+  ssl-network:
+    driver: bridge
+
+volumes:
+  certs:
+    driver: local

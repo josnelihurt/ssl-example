@@ -1,0 +1,57 @@
+# Binaries and executables
+*.exe
+*.out
+*.app
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Build directories
+build/
+dist/
+target/
+out/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Docker volumes and temporary files
+docker-compose.override.yml
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Node modules (if any)
+node_modules/
+
+# Python cache (if any)
+__pycache__/
+*.pyc
+*.pyo
+
+# Keep certificates but ignore private keys in some contexts
+# Note: We want to include our generated certificates for the demo
+# but exclude any accidentally generated private keys outside certs/
+*.key
+!certs/*.key
+
+# Keep the certs directory structure
+!certs/.gitkeep
