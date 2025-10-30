@@ -34,6 +34,14 @@ echo "=========================================="
 echo "Showing logs from all containers..."
 echo "Press Ctrl+C to stop all services"
 echo "=========================================="
+echo ""
+echo "NOTE: If you need to make changes and recompile:"
+echo "  1. Press Ctrl+C to stop the services"
+echo "  2. Modify the code as needed"
+echo "  3. Run this script again"
+echo ""
+echo "The health endpoint is automatically called by Docker"
+echo "=========================================="
 
 # Function to handle cleanup on exit
 cleanup() {
