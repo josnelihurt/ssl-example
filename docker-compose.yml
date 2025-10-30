@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   nginx:
     build:
@@ -20,7 +18,11 @@ services:
       retries: 3
 
   test-https-no-ca:
-    image: ssl-example-test-https-no-ca
+    build:
+      context: .
+      dockerfile: clients/Dockerfile
+      args:
+        BINARY_NAME: test_https_no_ca
     volumes:
       - ./certs:/certs:ro
     networks:
@@ -32,7 +34,11 @@ services:
       - SERVER_HOST=nginx
 
   test-https-insecure:
-    image: ssl-example-test_https_insecure
+    build:
+      context: .
+      dockerfile: clients/Dockerfile
+      args:
+        BINARY_NAME: test_https_insecure
     volumes:
       - ./certs:/certs:ro
     networks:
@@ -44,7 +50,11 @@ services:
       - SERVER_HOST=nginx
 
   test-https-with-ca:
-    image: ssl-example-test_https_with_ca
+    build:
+      context: .
+      dockerfile: clients/Dockerfile
+      args:
+        BINARY_NAME: test_https_with_ca
     volumes:
       - ./certs:/certs:ro
     networks:
@@ -56,7 +66,11 @@ services:
       - SERVER_HOST=nginx
 
   test-mtls-no-client-cert:
-    image: ssl-example-test_mtls_no_client_cert
+    build:
+      context: .
+      dockerfile: clients/Dockerfile
+      args:
+        BINARY_NAME: test_mtls_no_client_cert
     volumes:
       - ./certs:/certs:ro
     networks:
@@ -68,7 +82,11 @@ services:
       - SERVER_HOST=nginx
 
   test-mtls-invalid-cert:
-    image: ssl-example-test_mtls_invalid_cert
+    build:
+      context: .
+      dockerfile: clients/Dockerfile
+      args:
+        BINARY_NAME: test_mtls_invalid_cert
     volumes:
       - ./certs:/certs:ro
     networks:
@@ -80,7 +98,11 @@ services:
       - SERVER_HOST=nginx
 
   test-mtls-valid-cert:
-    image: ssl-example-test_mtls_valid_cert
+    build:
+      context: .
+      dockerfile: clients/Dockerfile
+      args:
+        BINARY_NAME: test_mtls_valid_cert
     volumes:
       - ./certs:/certs:ro
     networks:

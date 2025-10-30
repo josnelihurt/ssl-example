@@ -171,6 +171,7 @@ ssl-example/
 
 1. **Clone and navigate to the project:**
    ```bash
+   git clone git@github.com:josnelihurt/ssl-example.git
    cd ssl-example
    ```
 
